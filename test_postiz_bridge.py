@@ -43,4 +43,18 @@ class PostizTests(unittest.TestCase):
        duplicate=p.publish("verified-id",execute=True)
        self.assertEqual(duplicate["state"],"BLOCKED_DUPLICATE_UNRESOLVED_SUBMISSION")
 
+ def test_ambiguous_post_failure_blocks_retry(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   with mock.patch.object(p,"RECEIPTS",Path(tmp)/"receipts.json"):
+    with mock.patch.object(p,"ALLOW",{"verified-id"}):
+     with mock.patch.object(p,"channels",return_value=[{
+       "id":"verified-id","network":"bluesky","disabled":False
+     }]):
+      with mock.patch.object(p,"call",side_effect=RuntimeError("FAIL_POSTIZ_HTTP_500")):
+       first=p.publish("verified-id",execute=True)
+       self.assertEqual(first["state"],"SUBMISSION_UNCERTAIN_BLOCK_RETRY")
+       self.assertIs(first["published_verified"],False)
+       repeat=p.publish("verified-id",execute=True)
+       self.assertEqual(repeat["state"],"BLOCKED_DUPLICATE_UNRESOLVED_SUBMISSION")
+
 if __name__=="__main__":unittest.main(verbosity=2)

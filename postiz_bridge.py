@@ -86,7 +86,8 @@ def publish(integration_id,execute=False):
                 "would_publish":True,"published":False}
     old=amplify.read_json(RECEIPTS,{"items":[]})
     if any(r.get("integration_id")==integration_id and r.get("state") in
-           ("SUBMITTED_UNVERIFIED","PROVIDER_CONFIRMED_UNVERIFIED") for r in old["items"]):
+           ("SUBMISSION_STARTED_NO_ACK","SUBMISSION_UNCERTAIN_BLOCK_RETRY",
+            "SUBMITTED_UNVERIFIED","PROVIDER_CONFIRMED_UNVERIFIED") for r in old["items"]):
         return {"state":"BLOCKED_DUPLICATE_UNRESOLVED_SUBMISSION"}
     # Guardar intención previa para evitar duplicación si la llamada se interrumpe.
     key=dt.datetime.now(dt.timezone.utc).strftime("%Y%m%d-%H%M%S")+"-"+integration_id
@@ -99,7 +100,10 @@ def publish(integration_id,execute=False):
         rec["state"]="SUBMITTED_UNVERIFIED"
         rec["provider_response"]=result
     except RuntimeError as err:
-        rec["state"]=str(err)
+        # HTTP error o corte de red puede ocultar un POST que sí llegó al proveedor.
+        # Bloquear reenvío hasta reconciliar evita publicaciones duplicadas.
+        rec["state"]="SUBMISSION_UNCERTAIN_BLOCK_RETRY"
+        rec["error"]=str(err)
     amplify.write_json(RECEIPTS,old)
     return {"state":rec["state"],"integration_id":integration_id,
             "published_verified":False,"permalink":None,
