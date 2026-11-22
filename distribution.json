@@ -1,0 +1,54 @@
+{
+  "video": "https://www.tiktok.com/@dedavid22/video/7710983123021974816",
+  "channels": {
+    "whatsapp": {
+      "intent_url": "https://api.whatsapp.com/send?text=Mira%20este%20v%C3%ADdeo%20de%20Denis%20en%20TikTok%20%F0%9F%92%AA%20https%3A%2F%2Fwww.tiktok.com%2F%40dedavid22%2Fvideo%2F7710983123021974816",
+      "state": "READY_COMPOSER_ONLY",
+      "permalink_verified": null,
+      "clicks_real": null,
+      "views_attributed": null,
+      "notes": "Solo abre una ventana para compartir. Se requiere cuenta y envío real."
+    },
+    "telegram": {
+      "intent_url": "https://t.me/share/url?url=https%3A%2F%2Fwww.tiktok.com%2F%40dedavid22%2Fvideo%2F7710983123021974816&text=Mira%20este%20v%C3%ADdeo%20de%20Denis%20en%20TikTok%20%F0%9F%92%AA",
+      "state": "READY_COMPOSER_ONLY",
+      "permalink_verified": null,
+      "clicks_real": null,
+      "views_attributed": null,
+      "notes": "Solo abre una ventana para compartir. Se requiere cuenta y envío real."
+    },
+    "x": {
+      "intent_url": "https://twitter.com/intent/tweet?text=Mira%20este%20v%C3%ADdeo%20de%20Denis%20en%20TikTok%20%F0%9F%92%AA&url=https%3A%2F%2Fwww.tiktok.com%2F%40dedavid22%2Fvideo%2F7710983123021974816",
+      "state": "READY_COMPOSER_ONLY",
+      "permalink_verified": null,
+      "clicks_real": null,
+      "views_attributed": null,
+      "notes": "Solo abre una ventana para compartir. Se requiere cuenta y envío real."
+    },
+    "bluesky": {
+      "intent_url": "https://bsky.app/intent/compose?text=Mira%20este%20v%C3%ADdeo%20de%20Denis%20en%20TikTok%20%F0%9F%92%AA%20https%3A%2F%2Fwww.tiktok.com%2F%40dedavid22%2Fvideo%2F7710983123021974816",
+      "state": "READY_COMPOSER_ONLY",
+      "permalink_verified": null,
+      "clicks_real": null,
+      "views_attributed": null,
+      "notes": "Solo abre una ventana para compartir. Se requiere cuenta y envío real."
+    },
+    "reddit": {
+      "intent_url": "https://www.reddit.com/submit?url=https%3A%2F%2Fwww.tiktok.com%2F%40dedavid22%2Fvideo%2F7710983123021974816&title=Mira%20este%20v%C3%ADdeo%20de%20Denis%20en%20TikTok%20%F0%9F%92%AA",
+      "state": "READY_COMPOSER_ONLY",
+      "permalink_verified": null,
+      "clicks_real": null,
+      "views_attributed": null,
+      "notes": "Solo abre una ventana para compartir. Se requiere cuenta y envío real."
+    },
+    "email": {
+      "intent_url": "mailto:?subject=V%C3%ADdeo%20de%20Denis%20en%20TikTok&body=Mira%20este%20v%C3%ADdeo%20de%20Denis%20en%20TikTok%20%F0%9F%92%AA%20https%3A%2F%2Fwww.tiktok.com%2F%40dedavid22%2Fvideo%2F7710983123021974816",
+      "state": "READY_COMPOSER_ONLY",
+      "permalink_verified": null,
+      "clicks_real": null,
+      "views_attributed": null,
+      "notes": "Solo abre una ventana para compartir. Se requiere cuenta y envío real."
+    }
+  },
+  "verified_social_posts": 0
+}

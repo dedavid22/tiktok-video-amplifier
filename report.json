@@ -1,0 +1,13 @@
+{
+  "generated_at_utc": "2026-11-22T22:24:29.909241+00:00",
+  "video_url": "https://www.tiktok.com/@dedavid22/video/7710983123021974816",
+  "static_site": "PASS_LOCAL_FILE_EXISTS",
+  "landing_public": "BLOCKED_UNTIL_HTTP_200_AND_CONTENT_MATCH",
+  "social_publications": "BLOCKED_NOT_CONNECTED",
+  "social_published_verified": 0,
+  "real_visitors": null,
+  "real_video_views_attributed": null,
+  "followers_from_campaign": null,
+  "status": "READY_NOT_DISTRIBUTED",
+  "rules": "PASS no significa viral; contenido generado y enlaces listos no prueban visitas."
+}
