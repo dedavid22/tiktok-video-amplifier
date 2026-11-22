@@ -2,12 +2,15 @@
   "generated_at_utc": "2026-11-22T22:24:29.909241+00:00",
   "video_url": "https://www.tiktok.com/@dedavid22/video/7710983123021974816",
   "static_site": "PASS_LOCAL_FILE_EXISTS",
-  "landing_public": "BLOCKED_UNTIL_HTTP_200_AND_CONTENT_MATCH",
+  "landing_public": "PASS_PUBLIC_HTTP_200_WITH_CORRECT_VIDEO",
   "social_publications": "BLOCKED_NOT_CONNECTED",
   "social_published_verified": 0,
   "real_visitors": null,
   "real_video_views_attributed": null,
   "followers_from_campaign": null,
-  "status": "READY_NOT_DISTRIBUTED",
-  "rules": "PASS no significa viral; contenido generado y enlaces listos no prueban visitas."
+  "status": "PASS_PUBLIC_LANDING_ONLY_BLOCKED_DISTRIBUTION",
+  "rules": "PASS no significa viral; contenido generado y enlaces listos no prueban visitas.",
+  "video_public": "PASS_PUBLIC_VIDEO_BELONGS_TO_OWNER",
+  "actual_distribution": "BLOCKED_NO_VERIFIED_POSTS",
+  "last_verified_at_utc": "2026-11-22T22:30:14.646940+00:00"
 }

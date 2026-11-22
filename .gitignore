@@ -5,3 +5,5 @@ __pycache__/
 !.env.example
 .venv/
 *.log
+verification.json
+postiz_receipts.json

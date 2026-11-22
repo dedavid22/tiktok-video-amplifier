@@ -72,18 +72,18 @@ def generate(video_url: str = VIDEO):
        "created_at_utc":old.get("created_at_utc") or dt.datetime.now(dt.timezone.utc).isoformat(),
        "cost_eur":0,
        "notes":"Compartir enlaces o desplegar una web NO implica tráfico real.",
-       "published_to_social_verified":old.get("published_to_social_verified",[]),
+       "published_to_social_verified":[],  # A local JSON record is not proof of publication.
     }
     write_json(DATA,campaign)
     shares=share_targets(url)
-    prev=read_json(MATRIX,{}).get("channels",{})
     channels={}
     for name, link in shares.items():
-        oldrec=prev.get(name,{})
+        # El manifiesto de compartición jamás puede probar publicaciones externas.
+        # Un estado introducido a mano no autoriza PUBLISHED_VERIFIED.
         channels[name]={
            "intent_url":link,
-           "state":oldrec.get("state") if oldrec.get("state")=="PUBLISHED_VERIFIED" else "READY_COMPOSER_ONLY",
-           "permalink_verified":oldrec.get("permalink_verified") if oldrec.get("state")=="PUBLISHED_VERIFIED" else None,
+           "state":"READY_COMPOSER_ONLY",
+           "permalink_verified":None,
            "clicks_real":None, "views_attributed":None,
            "notes":"Solo abre una ventana para compartir. Se requiere cuenta y envío real."
         }
@@ -175,6 +175,19 @@ def verify_public(video_url=VIDEO, landing_url=PUBLIC_SITE, check_site=True):
     results["checked_at_utc"]=dt.datetime.now(dt.timezone.utc).isoformat()
     results["real_visits_cannot_be_measured_by_static_github_pages"]=True
     write_json(ROOT/"verification.json",results)
+    report=read_json(REPORT,{})
+    report["landing_public"]=results["landing"]
+    report["video_public"]=results["video"]
+    report["actual_distribution"]=results["actual_distribution"]
+    report["last_verified_at_utc"]=results["checked_at_utc"]
+    report["social_published_verified"]=0  # No pruebas de publicación externa.
+    report["real_visitors"]=None
+    report["real_video_views_attributed"]=None
+    report["followers_from_campaign"]=None
+    if results["video"]=="PASS_PUBLIC_VIDEO_BELONGS_TO_OWNER" and results["landing"]=="PASS_PUBLIC_HTTP_200_WITH_CORRECT_VIDEO":
+        report["status"]="PASS_PUBLIC_LANDING_ONLY_BLOCKED_DISTRIBUTION"
+    else: report["status"]="BLOCKED_PUBLIC_VERIFICATION_INCOMPLETE"
+    write_json(REPORT,report)
     print(json.dumps(results,ensure_ascii=False))
     return results
 
@@ -186,7 +199,9 @@ def main():
     if args.action=="generate":generate(args.video_url)
     else:
         r=verify_public(args.video_url,check_site=args.action=="verify")
-        if r["video"].startswith("FAIL") or r["landing"].startswith("FAIL"):
-            raise SystemExit(1)
+        if r["video"]!="PASS_PUBLIC_VIDEO_BELONGS_TO_OWNER":
+            raise SystemExit(2)
+        if args.action=="verify" and r["landing"]!="PASS_PUBLIC_HTTP_200_WITH_CORRECT_VIDEO":
+            raise SystemExit(2)
 if __name__=="__main__":
     main()
